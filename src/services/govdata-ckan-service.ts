@@ -10,10 +10,6 @@ export type OrganizationData = {
   package_count: number;
 };
 
-
-
-// ✅ Improvement: Pre-index organizationsData using Map for O(1) lookups
-
 export function getDatasetCounts(
   departmentList: DepartmentList,
   organizationsData: OrganizationData[]
@@ -33,29 +29,6 @@ export function getDatasetCounts(
   });
 }
 
-function calculateDatasetCountsPerDepartment(
-  organizationsData: OrganizationData[],
-  departmentName: string,
-  subordinates: string[]
-) {
-  let result = getDatasetCountForMinistry(organizationsData, departmentName);
-  subordinates.forEach((subordinate) => {
-    result += getDatasetCountForMinistry(organizationsData, subordinate);
-  });
-
-  return result;
-}
-
-function getDatasetCountForMinistry(
-  organizationData: OrganizationData[],
-  ministry: string
-) {
-  return (
-    organizationData.find((organization) => organization.title == ministry)
-      ?.package_count || 0
-  );
-}
-
 export function sortDatasetCounts(
   departmentDatasetsCounts: DepartmentDatasetCount[]
 ): DepartmentDatasetCount[] {
@@ -65,4 +38,3 @@ export function sortDatasetCounts(
   return sorted;
 }
 export { DepartmentDatasetCount };
-

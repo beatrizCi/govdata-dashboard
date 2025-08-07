@@ -1,7 +1,9 @@
 import { expect } from "chai";
 import { DepartmentList, OrganizationData } from "../interfaces";
-import { getDatasetCounts, sortDatasetCounts } from "../services/govdata-ckan-service";
-
+import {
+  getDatasetCounts,
+  sortDatasetCounts,
+} from "../services/govdata-ckan-service";
 
 describe("govdata-ckan-service", () => {
   const departments: DepartmentList = {
@@ -38,19 +40,23 @@ describe("govdata-ckan-service", () => {
   });
 
   it("should ignore non-matching org names", () => {
-    const brokenData = [
-      { title: "  Ministry A ", package_count: 100 }, // with extra spaces
-      { title: "Ministry C", package_count: 99 }, // not in departments
+    const brokenData: OrganizationData[] = [
+      { title: "  Ministry A ", package_count: 100 },
+      { title: "Ministry C", package_count: 99 },
     ];
     const result = getDatasetCounts(departments, brokenData);
-    expect(result[0].numberOfDatasets).to.equal(100); // still matches trimmed
+    expect(result[0].numberOfDatasets).to.equal(100);
   });
 
   it("should treat missing package_count as 0", () => {
-    const broken = [
-      { title: "Ministry A" } as any // missing count
-    ];
-    const result = getDatasetCounts(departments, broken);
+    type LooseOrg = { title: string; package_count?: number };
+    const broken: LooseOrg[] = [{ title: "Ministry A" }];
+    const result = getDatasetCounts(departments, broken as OrganizationData[]);
     expect(result[0].numberOfDatasets).to.equal(0);
+  });
+
+  it("should return empty array if department list is empty", () => {
+    const result = getDatasetCounts({ departments: [] }, organizations);
+    expect(result).to.deep.equal([]);
   });
 });

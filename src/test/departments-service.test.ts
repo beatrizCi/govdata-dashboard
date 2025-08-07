@@ -1,7 +1,9 @@
 import { expect } from "chai";
 import { DepartmentList } from "../interfaces";
-import { getMinistriesNames, getSubordinates } from "../services/departments-service";
-
+import {
+  getMinistriesNames,
+  getSubordinates,
+} from "../services/departments-service";
 
 describe("departments-service", () => {
   const departmentList: DepartmentList = {

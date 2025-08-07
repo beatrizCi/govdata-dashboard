@@ -14,8 +14,8 @@ const app = express();
 //  Main dashboard route: fetch + render
 app.get("/", async function (req, res) {
   try {
-    const organizations: OrganizationData[] =
-      (await fetchAllOrganizationData()).result;
+    const organizations: OrganizationData[] = (await fetchAllOrganizationData())
+      .result;
 
     const datasetCounts = getDatasetCounts(
       departmentList as DepartmentList,
