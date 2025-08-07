@@ -1,0 +1,37 @@
+{
+  "name": "backendChallengeTypescript",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -noEmit -P ./tsconfig.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write .",
+    "start": "ts-node -T app.ts",
+    "watch:start": "nodemon . --ext ts,json --exec 'npm start'",
+    "test": "mocha -r ts-node/register --exit --timeout 20000 '**/*.test.ts'",
+    "watch:test": "nodemon . --ext ts,json --exec 'npm test'"
+  },
+  "dependencies": {
+    "axios": "1.4.0",
+    "ejs": "^3.1.9",
+    "express": "4.18.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/ejs": "3.1.2",
+    "@types/express": "4.17.17",
+    "@types/mocha": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "5.59.11",
+    "@typescript-eslint/parser": "5.60.0",
+    "chai": "^4.3.7",
+    "chai-http": "4.4.0",
+    "eslint": "8.43.0",
+    "mocha": "^10.2.0",
+    "nodemon": "2.0.22",
+    "prettier": "2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "5.1.3"
+  }
+}

@@ -1,0 +1,7 @@
+*
+!src
+!app.ts
+!app.test.ts
+!tsconfig.json
+!package.json
+!package-lock.json
